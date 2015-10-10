@@ -179,46 +179,32 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 					<div class="page-inner">
 						<h2>INDEX</h2>
 						<p>Last Post : <?php echo $_SESSION['name']; ?></p>
-						<ul>
-							<?php foreach ($posts as $post) : ?>
-								<li>
-									<p>
-										<a href="view.php?id=<?php echo $post['id']; ?>">
-											<?php echo h($post['body']); ?>
-										</a>
-									</p>
-									<p>
-										<?php echo h($post['name']); ?>
-									</p>
-									<p>
-										<?php echo h($post['created']); ?>
-									</p>
-									<p>
-										<a href="edit.php?id=<?php echo $post['id']; ?>">
-											EDIT  
-										</a>
-										<a href="delete.php?id=<?php echo $post['id']; ?>">
-											DELETE
-										</a>
-									</p>
-									<br>
-								</li>
-							<?php endforeach ; ?>
-						</ul>
+
 						<div class="container">
 							<div class="main">
 								<ul class="cbp_tmtimeline">
-									<li>
-										<time class="cbp_tmtime" datetime="2015-10-10 00:52:04"><span>2015-10-10 00:52:04</span></time>
-										<div class="cbp_tmicon cbp_tmicon-phone"></div>
-										<div class="cbp_tmlabel">
-											<h2>ここに名前を入力</h2>
-											<p>本日は晴れなり。良い天気かな。楽しい日になるとよいのだが。</p>
-										</div>
-									</li>
+									<?php foreach ($posts as $post) : ?>
+										<li>
+											<span class="cbp_tmtime" ><?php echo h($post['created']); ?></span>
+											<span>
+												<a href="edit.php?id=<?php echo $post['id']; ?>">
+													EDIT  
+												</a>
+												<a href="delete.php?id=<?php echo $post['id']; ?>">
+													DELETE
+												</a>
+											</span>
+											<div class="cbp_tmicon cbp_tmicon-phone"></div>
+											<div class="cbp_tmlabel">
+												<h5><?php echo h($post['name']); ?></h5>
+												<p><a href="view.php?id=<?php echo $post['id']; ?>"><?php echo h($post['body']); ?></a></p>
+											</div>
+										</li>
+									<?php endforeach ; ?>
 								</ul>
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<!-- ここまで左側スライドのページ -->
