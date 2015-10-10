@@ -106,14 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
+		<!-- 設定各種 -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<meta name="description" content="Blueprint: Split Layout" />
-		<meta name="keywords" content="website template, layout, css3, transition, effect, split, dual, two sides, portfolio" />
-		<meta name="author" content="Codrops" />
+		<!-- トップ全体のCSS -->
 		<link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="assets/css/component.css" />
 		<script src="assets/js/modernizr.custom.js"></script>
+		<!-- index用のCSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/timeline_default.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/timeline_component.css" />
 	</head>
 	<body>
 		<div class="container">
@@ -203,6 +205,20 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 								</li>
 							<?php endforeach ; ?>
 						</ul>
+						<div class="container">
+							<div class="main">
+								<ul class="cbp_tmtimeline">
+									<li>
+										<time class="cbp_tmtime" datetime="2015-10-10 00:52:04"><span>2015-10-10 00:52:04</span></time>
+										<div class="cbp_tmicon cbp_tmicon-phone"></div>
+										<div class="cbp_tmlabel">
+											<h2>ここに名前を入力</h2>
+											<p>本日は晴れなり。良い天気かな。楽しい日になるとよいのだが。</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- ここまで左側スライドのページ -->
