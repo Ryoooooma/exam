@@ -12,9 +12,9 @@ if (preg_match('/^[1-9][0-9]*$/', $_GET['id'])) {
 	exit;
 }
 
-$stmt = $dbh->prepare("select * from posts where id = :id limit 1");
+$stmt = $dbh->prepare("select * from comments where id = :id limit 1");
 $stmt->execute(array(":id" => $id));
-$post = $stmt->fetch() or die("no one found!");
+$comment = $stmt->fetch() or die("no one found!");
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
 	if (empty($error)) {
 
-		$sql = "update posts set
+		$sql = "update comments set
 				name = :name,
 				password = :password,
 				body = :body,
@@ -90,7 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 		);
 		$stmt->execute($params);
 
-		header('Location: '.SITE_URL);
+		header('Location: ../view.php?id='. $comment['post_id']);
+
 		exit;
 	}
 }
@@ -112,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
 			<p>
 				お名前：
-				<input type="text" name="name" value="<?php echo $post['name']; ?>"> 
+				<input type="text" name="name" value="<?php echo $comment['name']; ?>"> 
 				<span class="error">
 					<?php echo $error['name']; ?>
 				</span>
@@ -130,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 				記事内容：
 			</p>
 			<p>
-				<textarea name="body" cols="40" rows="5"><?php echo $post['body']; ?></textarea>
+				<textarea name="body" cols="40" rows="5"><?php echo $comment['body']; ?></textarea>
 				<span class="error">
 					<?php echo $error['body']; ?>
 				</span>
@@ -141,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 				<input type="hidden" name="id" value="">
 			</p>
 		</form>
-		<p><a href="index.php">戻る</a></p>
+		<p><a href="../view.php?id=<?php echo $comment['post_id']; ?>">戻る</a></p>
 
 	</body>
 </html>

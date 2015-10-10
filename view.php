@@ -25,7 +25,7 @@ $post_body = $post['body'];
 
 $comments = array();
 
-$sql = "select * from comments where post_id = $post_id order by created desc";
+$sql = "select * from comments where post_id = $post_id and status = 'active' order by created desc";
 foreach ($dbh->query($sql) as $row) {
 	array_push($comments, $row);
 }
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 		<form action="" method="POST">
 			<p>
 				お名前：
-				<input type="text" name="name" value=""> 
+				<input type="text" name="name" value="<?php echo $name; ?>"> 
 				<span class="error">
 					<?php echo $error['name']; ?>
 				</span>
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 				コメント内容：
 			</p>
 			<p>
-				<textarea name="body" cols="40" rows="5"></textarea>
+				<textarea name="body" cols="40" rows="5"><?php echo $body; ?></textarea>
 				<span class="error">
 					<?php echo $error['body']; ?>
 				</span>
@@ -170,10 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 						<?php echo $comment['created']; ?>
 					</p>
 					<p>
-						<a href="comments/edit.php?id=<?php echo $post['id']; ?>">
+						<a href="comments/edit.php?id=<?php echo $comment['id']; ?>">
 							[編集する]
 						</a>
-						<a href="comments/delete.php?id=<?php echo $post['id']; ?>">
+						<a href="comments/delete.php?id=<?php echo $comment['id']; ?>">
 							[削除する]
 						</a>
 					</p>

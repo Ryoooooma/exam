@@ -12,9 +12,9 @@ if (preg_match('/^[1-9][0-9]*$/', $_GET['id'])) {
 	exit;
 }
 
-$stmt = $dbh->prepare("select * from posts where id = :id limit 1");
+$stmt = $dbh->prepare("select * from comments where id = :id limit 1");
 $stmt->execute(array(":id" => $id));
-$post = $stmt->fetch() or die("no one found!");
+$comment = $stmt->fetch() or die("no one found!");
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
@@ -45,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
 	if (empty($error)) {
 
-		$sql = "update posts set status = 'deleted' where id =$id";
+		$sql = "update comments set status = 'deleted' where id =$id";
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
 
-		header('Location: '.SITE_URL);
+		header('Location: ../view.php?id='. $comment['post_id']);
 		exit;
 	}
 }
@@ -76,11 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 			</p>
 
 			<p>
-				<input type="submit" value="削除">
+				<input type="submit" value=" DELETE">
 				<input type="hidden" name="id" value="">
 			</p>
 		</form>
-		<p><a href="index.php">戻る</a></p>
+		<p><a href="../view.php?id=<?php echo $comment['post_id']; ?>">BACK</a></p>
 
 	</body>
 </html>

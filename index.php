@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 	// 名前の長さチェック(4字以上8字以下)
 	if (!$name == '') {
 		if (strlen($name) < 4) {
-			$error['name'] = 'お名前は4以上でお願いします';
+			$error['name'] = 'お名前は4字以上でお願いします';
 		}
 		if (strlen($name) > 8) {
 			$error['name'] = 'お名前は8字以下でお願いします';
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 				<div class="page page-left">
 					<div class="page-inner">
 						<h2>INDEX</h2>
-						<p>Last Post : <?php echo $_SESSION['name']; ?></p>
+						<p>Last Post : <strong><?php echo $_SESSION['name']; ?></strong></p>
 
 						<div class="container">
 							<div class="main">
@@ -188,16 +188,23 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 											<span class="cbp_tmtime" ><?php echo h($post['created']); ?></span>
 											<span>
 												<a href="edit.php?id=<?php echo $post['id']; ?>">
-													EDIT  
+													EDIT
 												</a>
+												   /   
 												<a href="delete.php?id=<?php echo $post['id']; ?>">
 													DELETE
 												</a>
 											</span>
 											<div class="cbp_tmicon cbp_tmicon-phone"></div>
-											<div class="cbp_tmlabel">
-												<h5><?php echo h($post['name']); ?></h5>
-												<p><a href="view.php?id=<?php echo $post['id']; ?>"><?php echo h($post['body']); ?></a></p>
+											<div class="cbp_tmlabel left_align">
+												<a href="view.php?id=<?php echo $post['id']; ?>">
+													<h5>
+														NAME：<?php echo h($post['name']); ?>
+													</h5>
+													<p>
+														<?php echo h($post['body']); ?>
+													</p>
+												</a>
 											</div>
 										</li>
 									<?php endforeach ; ?>
