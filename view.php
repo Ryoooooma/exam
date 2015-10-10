@@ -113,74 +113,108 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<title>データの編集</title>
+		<link rel="stylesheet" href="assets/css/mypage_bootstrap.min.css.min.css">   
+		<link rel="stylesheet" href="assets/css/mypage_font-awesome.css">
+		<link id="theme-style" rel="stylesheet" href="assets/css/mypage_styles.css">
+		<title>View</title>
 	</head>
 	<body>
-
-		<h1><?php echo $post['name'] ?>さんの記事</h1>
-
-		<h2>記事内容：「<?php echo $post['body'] ?>」</h2>
+		<header class="header">
+		    <div class="container">                       
+		        <div class="profile-content pull-left">
+		            <h1 class="name">NAME : <?php echo $post['name']; ?></h1>
+		            <h2 class="desc">POST AT : <?php echo $post['created']; ?></h2>   
+		        </div>
+		    </div>
+		</header>
 		
-		<h3>【コメントする】</h3>
-		<form action="" method="POST">
-			<p>
-				お名前：
-				<input type="text" name="name" value="<?php echo $name; ?>"> 
-				<span class="error">
-					<?php echo $error['name']; ?>
-				</span>
-			</p>
+		<div class="container sections-wrapper">
+		    <div class="row">
+		        <div class="primary col-md-8 col-sm-12 col-xs-12">
+		            <section class="about section">
+		                <div class="section-inner">
+		                    <h2 class="heading">POST</h2>
+		                    <div class="content">
+		                        <p>
+		                            <?php echo $post['body']; ?>
+		                        </p>    
+		                    </div>
+		                </div>
+		            </section>
+		        </div>
+		        <div class="secondary col-md-4 col-sm-12 col-xs-12">                            
+		            <aside class="languages aside section">
+		                <div class="section-inner">
+		                    <h2 class="heading">GIVE A COMMENT</h2>
+		                    <div class="content">
+		                        <form action="" method="POST">
+	                    			<p>
+	                    				NAME：
+	                    				<input type="text" name="name" value="<?php echo $name; ?>"> 
+	                    				<span class="error">
+	                    					<?php echo $error['name']; ?>
+	                    				</span>
+	                    			</p>
 
-			<p>
-				パスワード：
-				<input type="password" name="password" value=""> 
-				<span class="error">
-					<?php echo $error['password']; ?>
-				</span>
-			</p>
+	                    			<p>
+	                    				PASSWORD：
+	                    				<input type="password" name="password" value=""> 
+	                    				<span class="error">
+	                    					<?php echo $error['password']; ?>
+	                    				</span>
+	                    			</p>
 
-			<p>
-				コメント内容：
-			</p>
-			<p>
-				<textarea name="body" cols="40" rows="5"><?php echo $body; ?></textarea>
-				<span class="error">
-					<?php echo $error['body']; ?>
-				</span>
-			</p>
+	                    			<p>
+	                    				COMMENT：
+	                    			</p>
+	                    			<p>
+	                    				<textarea name="body" cols="40" rows="5"><?php echo $body; ?></textarea>
+	                    				<span class="error">
+	                    					<?php echo $error['body']; ?>
+	                    				</span>
+	                    			</p>
 
-			<p>
-				<input type="submit" value="コメント">
-			</p>
-		</form>
-
-
-
-		<h3>【コメント一覧】</h3>
-		<ul>
-			<?php foreach ($comments as $comment) : ?>
-				<li>
- 					<p>
-						<?php echo $comment['body']; ?>
-					</p>
-					<p>
-						<?php echo $comment['name']; ?>
-					</p>
-					<p>
-						<?php echo $comment['created']; ?>
-					</p>
-					<p>
-						<a href="comments/edit.php?id=<?php echo $comment['id']; ?>">
-							[編集する]
-						</a>
-						<a href="comments/delete.php?id=<?php echo $comment['id']; ?>">
-							[削除する]
-						</a>
-					</p>
-				</li>
-			<?php endforeach ; ?>
-		</ul>
-
+	                    			<p>
+	                    				<input type="submit" value="コメント">
+	                    			</p>
+                    			</form>
+		                    </div>
+		                </div>
+		            </aside>
+		            <aside class="languages aside section">
+		                <div class="section-inner">
+		                    <h2 class="heading">COMMENT INDEX</h2>
+		                    <div class="content">
+                        		<ul class="list-unstyled" style ="list-style-type: none;">
+                        			<?php foreach ($comments as $comment) : ?>
+                        				<li class="item">
+                         					<p>
+                        						COMMENT : <?php echo $comment['body']; ?>
+                        					</p>
+                        					<p>
+                        						NAME : <?php echo $comment['name']; ?>
+                        					</p>
+                        					<p>
+                        						POST AT <?php echo $comment['created']; ?>
+                        					</p>
+                        					<p>
+                        						<a href="comments/edit.php?id=<?php echo $comment['id']; ?>">
+                        							EDIT 
+                        						</a>
+                        						 / 
+                        						<a href="comments/delete.php?id=<?php echo $comment['id']; ?>">
+                        							DELETE
+                        						</a>
+                        					</p>
+                        				</li>
+                        			<?php endforeach ; ?>
+                        		</ul>
+		                    </div>
+		                </div>
+		            </aside>
+		        </div>
+		    </div>
+		</div>
 		<p><a href="index.php">戻る</a></p>
 	</body>
 </html>
